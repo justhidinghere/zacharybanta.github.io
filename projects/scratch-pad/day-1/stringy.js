@@ -81,7 +81,7 @@ function toDashCase(string) {
 function beginsWith(string, char) {
     // YOUR CODE BELOW HERE //
 
-    
+    return (string[0].toLowerCase() === char.toLowerCase());
 
     // YOUR CODE ABOVE HERE //
 }
@@ -101,7 +101,7 @@ function beginsWith(string, char) {
 function endsWith(string, char) {
     // YOUR CODE BELOW HERE //
 
-
+    return (string[(string.length) - 1].toLowerCase() === char.toLowerCase());
 
     // YOUR CODE ABOVE HERE //
 }
@@ -114,7 +114,7 @@ function endsWith(string, char) {
 function concat(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
 
-
+    return `${stringOne}${stringTwo}`;
 
     // YOUR CODE ABOVE HERE //
 }
@@ -132,7 +132,11 @@ function concat(stringOne, stringTwo) {
 function join(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
     var args = Array.from(arguments);
-
+    var combined = '';
+    for (var i = 0; i < arguments.length; i++) {
+        combined += arguments[i];
+    }
+    return combined;
 
     // YOUR CODE ABOVE HERE //
 }
@@ -149,7 +153,11 @@ function join(stringOne, stringTwo) {
 function longest(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
 
-
+    if (stringOne.length > stringTwo.length) {
+        return stringOne;
+    } else {
+        return stringTwo;
+    }
 
     // YOUR CODE ABOVE HERE //
 }
@@ -164,7 +172,13 @@ function longest(stringOne, stringTwo) {
 function sortAscending(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
 
-
+    if (stringOne.toLowerCase() < stringTwo.toLowerCase()) {
+        return 1;
+    } else if (stringTwo.toLowerCase() < stringOne.toLowerCase()) {
+        return -1;
+    } else {
+        return 0;
+    }
 
     // YOUR CODE ABOVE HERE //
 }
@@ -180,6 +194,13 @@ function sortAscending(stringOne, stringTwo) {
 function sortDescending(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
 
+    if (stringOne.toLowerCase() > stringTwo.toLowerCase()) {
+        return 1;
+    } else if (stringTwo.toLowerCase() > stringOne.toLowerCase()) {
+        return -1;
+    } else {
+        return 0;
+    }
 
 
 
