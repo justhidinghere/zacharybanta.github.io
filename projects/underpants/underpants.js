@@ -294,14 +294,9 @@ _.map = function(collection, action) {
 */
 _.pluck = function(arr, prop) {
     let newArray = [];
-    _.each(arr, function(e,i,a) {
-        _.map(e, function(e,i,a) {
-            if (i === prop) {
-                newArray.push(e);
-            }
-        });
+    return _.map(arr, function(e,i,a) {
+        return e[prop];
     });
-    return newArray;
 }
 
 /** _.contains()
@@ -342,7 +337,24 @@ _.contains = function(arr, val) {
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
-
+_.every = function (collection, test) {
+    let tempBools = [];
+    _.each(collection, function(e,i,a) {
+       if (test === undefined) {
+           if (e) {
+               tempBools.push(true);
+           } else {
+               tempBools.push(false);
+           }
+       } else if (test(e,i,a) === false) {
+           tempBools.push(false);
+       } else if (test(e,i,a) === true) {
+           tempBools.push(true);
+       }
+    });
+    let result = true;
+    return !(_.contains(tempBools, false)); 
+};
 
 /** _.some()
 * Arguments:
@@ -364,7 +376,23 @@ _.contains = function(arr, val) {
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
-
+_.some = function(collection, test) {
+    let tempBools = [];
+    _.each(collection, function(e,i,a) {
+       if (test === undefined) {
+           if (e) {
+               tempBools.push(true);
+           } else {
+               tempBools.push(false);
+           }
+       } else if (test(e,i,a) === false) {
+           tempBools.push(false);
+       } else if (test(e,i,a) === true) {
+           tempBools.push(true);
+       }
+    });
+    return (_.contains(tempBools, true)); 
+};
 
 /** _.reduce()
 * Arguments:
@@ -384,7 +412,20 @@ _.contains = function(arr, val) {
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
-
+_.reduce = function(arr, action, seed) {
+    let result;
+    _.each(arr, function(e,i,a) {
+        if (i === 0 && seed === undefined) {
+            result = arr[0];
+        } else if (i === 0 && seed !== undefined) {
+            result = seed;
+            result = action(result, e, i);
+        } else {
+            result = action(result, e, i);
+        }
+    });
+    return result;
+};
 
 /** _.extend()
 * Arguments:
@@ -400,7 +441,16 @@ _.contains = function(arr, val) {
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
-
+_.extend = function(object1, object2) {
+    _.each(arguments, function(e,i,a) {
+        if (i !== 0) {
+            _.each(e, function(e,i,a) {
+                object1[i] = e;
+            });
+        }
+    });
+    return object1;
+}
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
