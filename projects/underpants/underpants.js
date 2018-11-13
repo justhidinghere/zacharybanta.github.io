@@ -416,7 +416,7 @@ _.reduce = function(arr, action, seed) {
     let result;
     _.each(arr, function(e,i,a) {
         if (i === 0 && seed === undefined) {
-            result = arr[0];
+            result = e;
         } else if (i === 0 && seed !== undefined) {
             result = seed;
             result = action(result, e, i);
@@ -450,7 +450,7 @@ _.extend = function(object1, object2) {
         }
     });
     return object1;
-}
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
